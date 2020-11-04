@@ -11,7 +11,7 @@ include("header.php");
               <div class="row">
                 <div class="col-6">
                   <h3>
-                     Culture</h3>
+                     NSMT</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                     <li class="breadcrumb-item">Dashboard</li>
@@ -67,9 +67,9 @@ include("header.php");
                     </div>
                     <div class="greeting-user text-center">
                       <div class="profile-vector"><img class="img-fluid" src="../assets/images/dashboard/welcome.png" alt=""></div>
-                      <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span><?php $fullname = "Mr Segun"; echo $fullname; ?></span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
+                      <h4 class="f-w-600"><span id="greeting">Good Morning</span> <span><?php $fullname = "name_of_user"; echo $fullname; ?></span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
                       <p><span> Check the time.</span></p>
-                      <div class="whatsnew-btn"><a class="btn btn-primary">Tr</a></div>
+                      <div class="whatsnew-btn"><a class="btn btn-primary">View Transactions</a></div>
                       <div class="left-icon"><i class="fa fa-bell"> </i></div>
                     </div>
                   </div>

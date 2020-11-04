@@ -7,7 +7,7 @@
     <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../assets/images/logo/NSMT_small.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
     <title>NSMT - <?php echo $web_title; ?></title>
     <!-- Google font-->
@@ -161,8 +161,8 @@
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0">
                 <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
-                  <div class="media-body"><span>Emay Walter</span>
-                    <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                  <div class="media-body"><span>name_of_user</span>
+                    <p class="mb-0 font-roboto">Director <i class="middle fa fa-angle-down"></i></p>
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
@@ -192,11 +192,11 @@
         <!-- Page Sidebar Start-->
         <header class="main-nav">
             <center>
-          <div class="logo-wrapper"><a href="index.php"><img class="img-fluid for-light" src="../assets/images/logo/logo.png" height="100" width="100" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" height="100" width="100" alt=""></a>
+          <div class="logo-wrapper"><a href="index.php"><img class="img-fluid for-light" src="../assets/images/logo/NSMT_large.png" height="100" width="100" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/NSMT_large.png" height="100" width="100" alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
           </div>
-          <div class="logo-icon-wrapper"><a href="index.php"><img class="img-fluid" src="../assets/images/logo/logo.png" alt=""></a></div>
+          <div class="logo-icon-wrapper"><a href="index.php"><img class="img-fluid" src="../assets/images/logo/NSMT_large.png" alt=""></a></div>
           </center>
           <nav>
             <div class="main-navbar">
@@ -208,21 +208,53 @@
                   </li>
                   <li class="sidebar-title">
                     <div>
-                      <h6 class="">Crush Culture</h6>
-                      <p class="">Morden Communtiy of Party Freak</p>
+                      <h6 class="">NSMT</h6>
+                      <p class="">Track Student Payment</p>
                     </div>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Dashboard</span>
                       <label class="badge badge-success">1</label></a>
                     <ul class="nav-submenu menu-content">
-                      <li><a class="" href="index.php">Party Report</a></li>
+                      <li><a class="" href="index.php">Finance Report</a></li>
                     </ul>
                   </li>
-                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Party</span>
+                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Customer Service</span>
                       <label class="badge badge-success">2</label></a>
                     <ul class="nav-submenu menu-content">
-                      <li><a class="" href="map-track.php">Map Track</a></li>
-                      <li><a class="" href="index.php">Card Track</a></li>
+                      <li><a class="" href="#">Students</a></li>
+                      <li><a class="" href="#">Enquiry</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Transaction</span>
+                      <label class="badge badge-success">1</label></a>
+                    <ul class="nav-submenu menu-content">
+                      <li><a class="" href="#">Fees Payment</a></li>
+                      <!-- <li><a class="" href="#">Card Track</a></li> -->
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Approval</span>
+                      <label class="badge badge-success">2</label></a>
+                    <ul class="nav-submenu menu-content">
+                      <li><a class="" href="#">Fees Payment</a></li>
+                      <li><a class="" href="#">Students</a></li>
+                      <!-- <li><a class="" href="index.php">Card Track</a></li> -->
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Reports</span>
+                      <label class="badge badge-success">3</label></a>
+                    <ul class="nav-submenu menu-content">
+                      <li><a class="" href="#">Fees Payment</a></li>
+                      <li><a class="" href="#">Student List</a></li>
+                      <li><a class="" href="#">Notification</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Configuration</span>
+                      <label class="badge badge-success">4</label></a>
+                    <ul class="nav-submenu menu-content">
+                      <li><a class="" href="#">Payment Product</a></li>
+                      <li><a class="" href="#">Payment Category</a></li>
+                      <li><a class="" href="#">Course Management</a></li>
+                      <li><a class="" href="#">Staff Management</a></li>
                     </ul>
                   </li>
                   <!-- <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>
