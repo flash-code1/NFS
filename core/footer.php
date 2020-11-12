@@ -3,7 +3,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2020 © Crush Culture All rights reserved.</p>
+                <p class="mb-0">Copyright 2020 © Nspire All rights reserved.</p>
               </div>
               <div class="col-md-6">
                 <p class="pull-right mb-0">Developed by  <i class="fa fa-heart font-secondary"></i> Oluwaseun</p>
@@ -43,6 +43,9 @@
     <script src="../assets/js/typeahead-search/handlebars.js"></script>
     <script src="../assets/js/typeahead-search/typeahead-custom.js"></script>
     <script src="../assets/js/tooltip-init.js"></script>
+    <!-- datatable -->
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>

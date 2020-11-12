@@ -167,10 +167,10 @@
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
                   <li><i data-feather="user"></i><span>Account </span></li>
-                  <li><i data-feather="mail"></i><span>Inbox</span></li>
-                  <li><i data-feather="file-text"></i><span>Taskboard</span></li>
+                  <li><i data-feather="mail"></i><span>Notification</span></li>
+                  <!-- <li><i data-feather="file-text"></i><span>Taskboard</span></li> -->
                   <li><i data-feather="settings"></i><span>Settings</span></li>
-                  <li><i data-feather="log-in"> </i><span>Log in</span></li>
+                  <li><i data-feather="log-in"> </i><span>Log out</span></li>
                 </ul>
               </li>
             </ul>
@@ -245,7 +245,6 @@
                     <ul class="nav-submenu menu-content">
                       <li><a class="" href="#">Fees Payment</a></li>
                       <li><a class="" href="#">Student List</a></li>
-                      <li><a class="" href="#">Notification</a></li>
                     </ul>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Configuration</span>
@@ -254,7 +253,7 @@
                       <li><a class="" href="#">Payment Product</a></li>
                       <li><a class="" href="#">Payment Category</a></li>
                       <li><a class="" href="#">Course Management</a></li>
-                      <li><a class="" href="#">Staff Management</a></li>
+                      <li><a class="" href="staff_management.php">Staff Management</a></li>
                     </ul>
                   </li>
                   <!-- <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>
