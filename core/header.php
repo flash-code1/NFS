@@ -93,7 +93,7 @@
                   </div>
                 </div>
               </li> -->
-              <li>                         <span class="header-search"><i data-feather="search"></i></span></li>
+              <!-- <li>                         <span class="header-search"><i data-feather="search"></i></span></li> -->
               <li class="onhover-dropdown">
                 <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-pill badge-secondary">4</span></div>
                 <ul class="notification-dropdown onhover-show-div">
@@ -122,8 +122,8 @@
                 <div class="mode"><i class="fa fa-moon-o"></i></div>
               </li>
             
-              <li class="onhover-dropdown"><i data-feather="message-square"></i>
-                <ul class="chat-dropdown onhover-show-div">
+              <!-- <li class="onhover-dropdown"><i data-feather="message-square"></i> -->
+                <!-- <ul class="chat-dropdown onhover-show-div">
                   <li class="bg-primary text-center">
                     <h6 class="f-18 mb-0">Message Box</h6>
                     <p class="mb-0">You have 3 new messages </p>
@@ -156,7 +156,7 @@
                     </div>
                   </li>
                   <li class="text-center"> <a class="btn btn-primary" href="#">View All     </a></li>
-                </ul>
+                </ul> -->
               </li>
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0">
@@ -169,7 +169,7 @@
                   <li><i data-feather="user"></i><span>Account </span></li>
                   <li><i data-feather="mail"></i><span>Notification</span></li>
                   <!-- <li><i data-feather="file-text"></i><span>Taskboard</span></li> -->
-                  <li><i data-feather="settings"></i><span>Settings</span></li>
+                  <!-- <li><i data-feather="settings"></i><span>Settings</span></li> -->
                   <li><i data-feather="log-in"> </i><span>Log out</span></li>
                 </ul>
               </li>
@@ -241,19 +241,19 @@
                     </ul>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Reports</span>
-                      <label class="badge badge-success">3</label></a>
+                      <label class="badge badge-success">2</label></a>
                     <ul class="nav-submenu menu-content">
                       <li><a class="" href="#">Fees Payment</a></li>
                       <li><a class="" href="#">Student List</a></li>
                     </ul>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Configuration</span>
-                      <label class="badge badge-success">4</label></a>
+                      <label class="badge badge-success">2</label></a>
                     <ul class="nav-submenu menu-content">
-                      <li><a class="" href="#">Payment Product</a></li>
-                      <li><a class="" href="#">Payment Category</a></li>
-                      <li><a class="" href="#">Course Management</a></li>
-                      <li><a class="" href="staff_management.php">Staff Management</a></li>
+                      <!-- <li><a class="" href="#">Payment Product</a></li>
+                      <li><a class="" href="#">Payment Category</a></li>-->
+                      <li><a class="" href="institution_manager.php">Institution Management</a></li>
+                      <li><a class="" href="payment_system.php">Payment system</a></li>
                     </ul>
                   </li>
                   <!-- <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>

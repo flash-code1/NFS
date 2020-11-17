@@ -46,6 +46,8 @@
     <!-- datatable -->
     <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+    <!-- form wizard -->
+    <script src="../assets/js/form-wizard/form-wizard-two.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>

@@ -1,5 +1,5 @@
 <?php
-$web_title = "Create Staff";
+$web_title = "Create Branch";
 include("header.php");
 ?>
 <!-- a new stuff -->
@@ -12,7 +12,7 @@ include("header.php");
                   <h3>Staff Management</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="staff_management.php"><i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item">Create Staff</li>
+                    <li class="breadcrumb-item">Create Branch</li>
                   </ol>
                 </div>
                 <div class="col-6">
@@ -57,86 +57,28 @@ include("header.php");
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5>Create Staff</h5><span>Please fill the form properly</span>
+                    <h5>Create Branch</h5><span>Please fill the form properly</span>
                   </div>
                   <div class="card-body">
                     <div class="stepwizard">
                       <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step"><a class="btn btn-primary" href="#step-1">1</a>
-                          <p>Step 1</p>
-                        </div>
-                        <div class="stepwizard-step"><a class="btn btn-light" href="#step-2">2</a>
-                          <p>Step 2</p>
-                        </div>
-                        <div class="stepwizard-step"><a class="btn btn-light" href="#step-3">3</a>
-                          <p>Step 3</p>
-                        </div>
-                        <div class="stepwizard-step"><a class="btn btn-light" href="#step-4">4</a>
-                          <p>Step 4</p>
+                        <div class="stepwizard-step"><a class="btn btn-primary" href="#step-4">1</a>
+                          <p>Create</p>
                         </div>
                       </div>
                     </div>
                     <form action="#" method="POST">
-                      <div class="setup-content" id="step-1">
-                        <div class="col-xs-12">
-                          <div class="col-md-12">
-                            <div class="form-group mb-3">
-                              <label class="control-label">First Name</label>
-                              <input class="form-control" type="text" placeholder="Samuel" required="required">
-                            </div>
-                            <div class="form-group mb-3">
-                              <label class="control-label">Last Name</label>
-                              <input class="form-control" type="text" placeholder="Ajiboye" required="required">
-                            </div>
-                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="setup-content" id="step-2">
-                        <div class="col-xs-12">
-                          <div class="col-md-12">
-                            <div class="form-group mb-3">
-                              <label class="control-label">Email</label>
-                              <input class="form-control" type="text" placeholder="samuel@gmail.com" required="required">
-                            </div>
-                            <div class="form-group mb-3">
-                              <label class="control-label">Password(Default - <b>Password1</b>)</label>
-                              <input class="form-control" type="password" value="Password1" placeholder="Password" required="required">
-                            </div>
-                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="setup-content" id="step-3">
-                        <div class="col-xs-12">
-                          <div class="col-md-12">
-                            <div class="form-group mb-3">
-                              <label class="control-label">Branch</label>
-                              <select class="form-control" required="required">
-                                  <option value=""></option>
-                                  <option value=""></option>
-                              </select>
-                            </div>
-                            <div class="form-group mb-3">
-                              <label class="control-label">Organization Role</label>
-                              <select class="form-control" required="required">
-                                  <option value=""></option>
-                                  <option value=""></option>
-                              </select>
-                            </div>
-                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-                          </div>
-                        </div>
-                      </div>
                       <div class="setup-content" id="step-4">
                         <div class="col-xs-12">
                           <div class="col-md-12">
+                          <div class="form-group mb-3">
+                              <label class="control-label">Name</label>
+                              <input class="form-control" type="text" placeholder="Head office" required="required">
+                            </div>
                             <div class="form-group mb-3">
-                              <label class="control-label">Usertype</label>
-                              <select class="form-control" required="required">
-                                  <option value="">Admin</option>
-                                  <option value="">Staff</option>
-                              </select>
+                              <label class="control-label">Address</label>
+                              <textarea class="form-control" type="text" placeholder="Samuel" required="required">
+                              </textarea>
                             </div>
                             <!-- <div class="form-group mb-3">
                               <label class="control-label">City</label>
