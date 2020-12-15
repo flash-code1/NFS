@@ -1,2 +1,2 @@
 # NFS
-Nspire Financial Management System
+Nspire Student Finance Management System
