@@ -7,8 +7,13 @@ include("header.php");
 <script src="datatable/DataTables/datatables.min.js"></script>
 <script src="datatable/jquery-3.3.1.min.js"></script>
 <?php
+if ($configuration == 1 && isset($_GET["course"]) && $_GET["course"] != ""){
+    $course_id = $_GET["course"];
 
-if ($configuration == 1){
+    // Display course details
+    $get_course = mysqli_query($con, "SELECT * FROM `courses` WHERE id = '$course_id'");
+    $gc = mysqli_fetch_array($get_course);
+    $course_name = $gc["name"];
 ?>
 <div class="page-body">
           <div class="container-fluid">
@@ -64,22 +69,51 @@ if ($configuration == 1){
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5>View Payment Categories</h5><span>This page help you view all the Payment Category of Nspire and also as a route for creating.</span>
+                    <h5><?php echo $course_name; ?></h5><span>This page help you view all the Payment Categories in <?php echo $gc["shortCode"] ?>.</span>
                     <!-- button to create -->
                     <button onclick="window.open ('create_payment_category.php')" style="float: right;" class="btn btn-pill btn-success btn-air-success btn-success-gradien" type="button">Create Category</button>
                     <!-- end button -->
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table id="emppayment" class="display nowrap dataTable">
+                      <table id="" class="display nowrap dataTable">
                         <thead>
                           <tr>
-                            <th>Course</th>
-                            <th>BatchYear</th>
-                            <th>Total CategoryAmount(₦)</th>
-                            <th>viewInstallment</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Amount(₦)</th>
+                            <th>createdDate</th>
+                            <th>updatedDate</th>
+                            <th>Status</th>
+                            <th>Edit</th>
                           </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            $query_cat = mysqli_query($con, "SELECT * FROM `payment_category` WHERE course_id = '$course_id'");
+                            if (mysqli_num_rows($query_cat) > 0){
+                                while ($row = mysqli_fetch_array($query_cat)) {
+                            ?>
+                            <tr>
+                                <td><?php echo $row["name"]; ?></td>
+                                <td><?php echo $row["description"]; ?></td>
+                                <td><?php echo number_format($row["price"], 2); ?></td>
+                                <td><?php echo $row["createdAt"]; ?></td>
+                                <td><?php echo $row["updatedAt"]; ?></td>
+                                <td><?php if ($row["Enabled"] == "1") {
+                                    echo "Active";
+                                } else {
+                                    echo "Not Active";
+                                } ?></td>
+                                <td><a href="#" class="btn btn-pill btn-dark btn-air-dark btn-dark-gradien" type="button">Edit</a></td>
+                            </tr>
+                            <?php
+                                }
+                            }else {
+                                echo "<marquee ><b style='color:red;'>No Payment Category,  Please Create - <a href='create_payment_category.php'>CLICK ME</a></b></marquee>";
+                            }
+                            ?>
+                        </tbody>
                         <!-- <tfoot>
                           <tr>
                             <th>Name</th>
@@ -92,24 +126,6 @@ if ($configuration == 1){
                         </tfoot> -->
                       </table>
                     </div>
-                    <script>
-        $(document).ready(function(){
-            $('#emppayment').DataTable({
-                'processing': true,
-                'serverSide': true,
-                'serverMethod': 'post',
-                'ajax': {
-                    'url':'datatable/paycat.php'
-                },
-                'columns': [
-                    { data: 'Name' },
-                    { data: 'batchYear' },
-                    { data: 'Total' },
-                    { data: 'Edit' },
-                ]
-            });
-        });
-        </script>
                   </div>
                 </div>
               </div>
@@ -127,9 +143,9 @@ if ($configuration == 1){
    swal.fire({
     type: "error",
     title: "User not Authorized",
-    text: "you have not been approved to view this page",
+    text: "you have not been approved to view this page or Wrong Data Passed",
    showConfirmButton: false,
-    timer: 2000
+    timer: 4000
     }).then(
     function (result) {
       history.go(-1);

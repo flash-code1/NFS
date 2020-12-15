@@ -3,6 +3,73 @@ $web_title = "Create Payment Category";
 include("header.php");
 ?>
 <!-- a new stuff -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = mysqli_real_escape_string($con, $_POST['name']);
+  $price = mysqli_real_escape_string($con, $_POST['price']);
+  $desc = mysqli_real_escape_string($con, $_POST['desc']);
+  $course = $_POST['course'];
+  $date_time = date('Y-m-d H:i:s');
+
+  $query_branch_check = mysqli_query($con, "SELECT * FROM `payment_category` WHERE name = '$name' AND course_id = '$course'");
+  
+  if (mysqli_num_rows($query_branch_check) <= 0) {
+    $insert_branch = mysqli_query($con, "INSERT INTO `payment_category` (`course_id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('{$course}', '{$name}', '{$desc}', '{$price}', '{$date_time}', '{$date_time}', '1')");
+
+    if ($insert_branch) {
+      echo '<script type="text/javascript">
+        $(document).ready(function(){
+            Swal.fire({
+                type: "success",
+                title: "Category Created",
+                text: "Thank you!",
+                showConfirmButton: false,
+                timer: 6000
+            })
+        });
+        </script>
+        ';
+    } else {
+      echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Creation Failed",
+              text: "Code Bug",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+    }
+  } else {
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+        Swal.fire({
+            type: "error",
+            title: "Category Name Exist",
+            text: "You cant create same category twice",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    });
+    </script>
+    ';
+  }
+}
+
+// function
+function fill_course($con)
+{
+    $bch = mysqli_query($con, "SELECT * FROM `courses` ORDER BY id ASC");
+    $output = '';
+    while ($row = mysqli_fetch_array($bch)) {
+        $output .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+    }
+    return $output;
+}
+?>
 <!-- Page Sidebar Ends-->
 <div class="page-body">
           <div class="container-fluid">
@@ -67,27 +134,27 @@ include("header.php");
                         </div>
                       </div>
                     </div>
-                    <form action="#" method="POST">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                       <div class="setup-content" id="step-4">
                         <div class="col-xs-12">
                           <div class="col-md-12">
                           <div class="form-group mb-3">
                               <label class="control-label">Name</label>
-                              <input class="form-control" type="text" placeholder="Java, Java Book" required="required">
+                              <input class="form-control" type="text" name="name" placeholder="Tution Due, Registration" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Price</label>
-                              <input class="form-control" type="number" placeholder="60000" required="required">
+                              <input class="form-control" type="number" name="price" placeholder="60000" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Description</label>
-                              <textarea class="form-control" type="text" placeholder="Paid Java Books" required="required">
+                              <textarea class="form-control" name="desc"  required="required">
                               </textarea>
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Course</label>
-                              <select class="form-control mt-1" type="text" required="required">
-                                <option value=""></option>
+                              <select class="form-control mt-1" type="text" name="course" required="required">
+                                <?php echo fill_course($con); ?>
                               </select>
                             </div>
                             <button class="btn btn-success pull-right" type="submit">Finish!</button>
