@@ -3,6 +3,73 @@ $web_title = "Create Course";
 include("header.php");
 ?>
 <!-- a new stuff -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = mysqli_real_escape_string($con, $_POST['name']);
+  $shortcode = mysqli_real_escape_string($con, $_POST['sch']);
+  $desc = mysqli_real_escape_string($con, $_POST['desc']);
+  $batch =  $_POST['byear'];
+  $branch =  $_POST['bch'];
+  $date_time = date('Y-m-d H:i:s');
+
+  $query_branch_check = mysqli_query($con, "SELECT * FROM `courses` WHERE name = '$name' OR shortCode = '$shortcode'");
+  
+  if (mysqli_num_rows($query_branch_check) <= 0) {
+    $insert_branch = mysqli_query($con, "INSERT INTO `courses` (`branch_id`, `name`, `shortCode`, `Description`, `batchYear`, `createdAt`, `UpdatedAt`, `Enabled`) VALUES ('{$branch}', '{$name}', '{$shortcode}', '{$desc}', '{$batch}', '{$date_time}', '{$date_time}', '1')");
+    if ($insert_branch) {
+      echo '<script type="text/javascript">
+        $(document).ready(function(){
+            Swal.fire({
+                type: "success",
+                title: "Course Created",
+                text: "Thank you!",
+                showConfirmButton: false,
+                timer: 6000
+            })
+        });
+        </script>
+        ';
+    } else {
+      echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Creation Failed",
+              text: "Code Bug",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+    }
+  } else {
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+        Swal.fire({
+            type: "error",
+            title: "Course Name or Short Code Exist",
+            text: "You cant create same course twice",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    });
+    </script>
+    ';
+  }
+}
+
+// function
+function fill_branch($con)
+{
+    $bch = mysqli_query($con, "SELECT * FROM `branch`");
+    $output = '';
+    while ($row = mysqli_fetch_array($bch)) {
+        $output .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+    }
+    return $output;
+}
+?>
 <!-- Page Sidebar Ends-->
 <div class="page-body">
           <div class="container-fluid">
@@ -70,17 +137,22 @@ include("header.php");
                         </div>
                       </div>
                     </div>
-                    <form action="#" method="POST">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                       <div class="setup-content" id="step-1">
                         <div class="col-xs-12">
                           <div class="col-md-12">
                             <div class="form-group mb-3">
                               <label class="control-label">Name</label>
-                              <input class="form-control" type="text" placeholder="National Diploma" required="required">
+                              <input class="form-control" type="text" name="name" placeholder="National Diploma" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">ShortCode</label>
-                              <input class="form-control" type="text" placeholder="ND" required="required">
+                              <input class="form-control" type="text" name="sch" placeholder="ND" required="required">
+                            </div>
+                            <div class="form-group mb-3">
+                              <label class="control-label">Description</label>
+                              <textarea class="form-control" name="desc" placeholder="ND" required="required">
+                              </textarea>
                             </div>
                             <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                           </div>
@@ -91,12 +163,12 @@ include("header.php");
                           <div class="col-md-12">
                                 <div class="form-group mb-3">
                                    <label class="control-label">Batch Year</label>
-                                   <input type="date" class="form-control" required="required">
+                                   <input type="date" class="form-control" name="byear" required="required">
                                 </div>
                                 <div class="form-group mb-3">
                                    <label class="control-label">Branch</label>
-                                   <select class="form-control" required="required">
-                                      <option value="">--</option>
+                                   <select class="form-control" name="bch" required="required">
+                                  <?php echo fill_branch($con); ?>
                                     </select>
                                 </div>
                                 <!-- end it here -->
