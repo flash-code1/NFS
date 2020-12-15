@@ -2,6 +2,13 @@
 $web_title = "Role Management";
 include("header.php");
 ?>
+<link href='datatable/DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
+<script src="datatable/DataTables/datatables.min.js"></script>
+<script src="datatable/jquery-3.3.1.min.js"></script>
+<?php
+
+if ($configuration == 1){
+?>
 <!-- make move -->
 <div class="page-body">
           <div class="container-fluid">
@@ -64,13 +71,13 @@ include("header.php");
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="display datatables" id="server-side-datatable">
+                      <table id="empRole" class="display nowrap dataTable">
                         <thead>
                           <tr>
                             <th>Name/Title</th>
                             <th>Description</th>
                             <th>CreatedOn</th>
-                            <th>Permission</th>
+                            <th>View</th>
                           </tr>
                         </thead>
                         <!-- <tfoot>
@@ -85,6 +92,24 @@ include("header.php");
                         </tfoot> -->
                       </table>
                     </div>
+                    <script>
+        $(document).ready(function(){
+            $('#empRole').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'datatable/role.php'
+                },
+                'columns': [
+                    { data: 'Title' },
+                    { data: 'Desc' },
+                    { data: 'GDate' },
+                    { data: 'close' },
+                ]
+            });
+        });
+        </script>
                   </div>
                 </div>
               </div>
@@ -95,5 +120,24 @@ include("header.php");
         </div>
 <!-- end -->
 <?php
+} else 
+{
+  echo '<script type="text/javascript">
+  $(document).ready(function(){
+   swal.fire({
+    type: "error",
+    title: "User not Authorized",
+    text: "you have not been approved to view this page",
+   showConfirmButton: false,
+    timer: 2000
+    }).then(
+    function (result) {
+      history.go(-1);
+    }
+    )
+    });
+   </script>
+  ';
+}
 include("footer.php");
 ?>

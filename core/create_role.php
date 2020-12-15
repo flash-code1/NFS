@@ -3,6 +3,90 @@ $web_title = "Create Role";
 include("header.php");
 ?>
 <!-- a new stuff -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $title = mysqli_real_escape_string($con, $_POST['title']);
+  $desc = mysqli_real_escape_string($con, $_POST['desc']);
+  // permission data
+  $dash = $_POST['dash'];
+  $cus = $_POST['cus'];
+  $trans = $_POST['trans'];
+  $app = $_POST['app'];
+  $rep = $_POST['rep'];
+  $conf = $_POST['conf'];
+
+  // date
+  $date = date('Y-m-d H:i:s');
+
+  $query_role_num = mysqli_query($con, "SELECT * FROM `role`");
+  $indexing = mysqli_num_rows($query_role_num) + 1;
+  
+  // insert into roles and permission
+  $query_role_check = mysqli_query($con, "SELECT * FROM `role` WHERE title = '$title'");
+
+  if (mysqli_num_rows($query_role_check) <= 0) {
+    $query_role = mysqli_query($con, "INSERT INTO `role` (`id`, `title`, `Description`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('{$indexing}', '{$title}', '{$desc}', '{$date}', '{$date}', '1')");
+
+    if ($query_role) {
+      $query_perm = mysqli_query($con, "INSERT INTO `permission` (`role_id`, `dashboard`, `customer_service`, `transaction`, `approval`, `reports`, `configuration`) VALUES ('{$indexing}', '{$dash}', '{$cus}', '{$trans}', '{$app}', '{$rep}', '{$conf}')");
+      if ($query_perm) {
+        echo '<script type="text/javascript">
+        $(document).ready(function(){
+            Swal.fire({
+                type: "success",
+                title: "Role & Permission Created",
+                text: "Thank you!",
+                showConfirmButton: false,
+                timer: 6000
+            })
+        });
+        </script>
+        ';
+      } else {
+        echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Permission creation Failed",
+              text: "Code Bug",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+      }
+    } else {
+      echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Role creation Error",
+              text: "Please Check Value",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+    }
+  } else {
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+        Swal.fire({
+            type: "error",
+            title: "Role Name Exist",
+            text: "You cant create a role twice",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    });
+    </script>
+    ';
+  }
+  
+}
+?>
 <!-- Page Sidebar Ends-->
 <div class="page-body">
           <div class="container-fluid">
@@ -70,17 +154,17 @@ include("header.php");
                         </div>
                       </div>
                     </div>
-                    <form action="#" method="POST">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                       <div class="setup-content" id="step-1">
                         <div class="col-xs-12">
                           <div class="col-md-12">
                             <div class="form-group mb-3">
                               <label class="control-label">Title</label>
-                              <input class="form-control" type="text" placeholder="Director" required="required">
+                              <input class="form-control" name="title" type="text" placeholder="Director" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Description</label>
-                              <textarea class="form-control" type="text" placeholder="Description" required="required">
+                              <textarea class="form-control" name="desc" type="text" required="required">
                               </textarea>
                             </div>
                             <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
@@ -94,7 +178,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Access Dashboard</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="dash" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>
@@ -103,7 +187,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Access Customer Service</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="cus" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>
@@ -112,7 +196,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Process Transaction</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="trans" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>
@@ -121,7 +205,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Access Approval</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="app" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>
@@ -130,7 +214,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Access Report</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="rep" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>
@@ -139,7 +223,7 @@ include("header.php");
                                   <div class="col-md-6">
                                   <div class="form-group mb-3">
                                     <label class="control-label">Access Configuration</label>
-                                    <select class="form-control" required="required">
+                                    <select class="form-control" name="conf" required="required">
                                       <option value="1">Yes</option>
                                       <option value="0">No</option>
                                     </select>

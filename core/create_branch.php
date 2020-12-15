@@ -3,6 +3,59 @@ $web_title = "Create Branch";
 include("header.php");
 ?>
 <!-- a new stuff -->
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = mysqli_real_escape_string($con, $_POST['name']);
+  $address = mysqli_real_escape_string($con, $_POST['address']);
+
+  $query_branch_check = mysqli_query($con, "SELECT * FROM `branch` WHERE name = '$name'");
+  
+  if (mysqli_num_rows($query_branch_check) <= 0) {
+    $insert_branch = mysqli_query($con, "INSERT INTO `branch` (`name`, `location`, `Enabled`) VALUES ('{$name}', '{$address}', '1')");
+
+    if ($insert_branch) {
+      echo '<script type="text/javascript">
+        $(document).ready(function(){
+            Swal.fire({
+                type: "success",
+                title: "Branch Created",
+                text: "Thank you!",
+                showConfirmButton: false,
+                timer: 6000
+            })
+        });
+        </script>
+        ';
+    } else {
+      echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Creation Failed",
+              text: "Code Bug",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+    }
+  } else {
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+        Swal.fire({
+            type: "error",
+            title: "Branch Name Exist",
+            text: "You cant create a branch twice",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    });
+    </script>
+    ';
+  }
+}
+?>
 <!-- Page Sidebar Ends-->
 <div class="page-body">
           <div class="container-fluid">
@@ -67,17 +120,17 @@ include("header.php");
                         </div>
                       </div>
                     </div>
-                    <form action="#" method="POST">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                       <div class="setup-content" id="step-4">
                         <div class="col-xs-12">
                           <div class="col-md-12">
                           <div class="form-group mb-3">
                               <label class="control-label">Name</label>
-                              <input class="form-control" type="text" placeholder="Head office" required="required">
+                              <input class="form-control" type="text" name="name" placeholder="Head office" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Address</label>
-                              <textarea class="form-control" type="text" placeholder="Samuel" required="required">
+                              <textarea class="form-control" type="text" name="address" placeholder="Samuel" required="required">
                               </textarea>
                             </div>
                             <!-- <div class="form-group mb-3">

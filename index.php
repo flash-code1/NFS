@@ -51,7 +51,10 @@ session_start();
 $_SESSION['timestamp']=time();
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-  if($_SESSION["usertype"] == "admin"){
+  if($_SESSION["usertype"] == "super"){
+    header("location: core/index.php");
+    exit;
+  } else {
     header("location: core/index.php");
     exit;
   }
@@ -97,7 +100,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         users.email,
                         users.fullname, 
                         users.password,
-                        users.usertype
+                        users.usertype,
+                        users.branch_id,
+                        users.role_id
                         FROM users
                         WHERE users.email = ?";
         // $sqlj = "SELECT users.id, users.int_id, users.username, users.fullname, users.usertype, users.password, org_role, display_name FROM staff JOIN users ON users.id = staff.user_id WHERE users.username = "sam"";
@@ -117,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $email, $fullname,  $hashed_password, $usertype);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $fullname,  $hashed_password, $usertype, $branch_id, $role_id);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -130,7 +135,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["email"] = $email;
                             $_SESSION["usertype"] = $usertype;
                             $_SESSION["fullname"] = $fullname;
-                            $_SESSION["usertype"] = $usertype;
+                            $_SESSION["branch_id"] = $branch_id;
+                            $_SESSION["role_id"] = $role_id;
                             // $_SESSION["lastname"] = $lastname;
                             // mailin
                             // begining of mail

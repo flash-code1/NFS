@@ -1,3 +1,45 @@
+<?php
+include("../function/db/config.php");
+# import connection file
+session_start();
+
+$islogged = $_SESSION["loggedin"];
+
+if (isset($_SESSION["loggedin"]) && isset($_SESSION["usertype"])) {
+
+$user_id = $_SESSION["id"];
+$user_email = $_SESSION["email"];
+$usertype = $_SESSION["usertype"];
+$user_fullname = $_SESSION["fullname"];
+$role_id = $_SESSION["role_id"];
+$branch_id =$_SESSION["branch_id"];
+// get users details
+$query_users_permission = mysqli_query($con, "SELECT * FROM `permission` WHERE role_id = '$role_id'");
+if (mysqli_num_rows($query_users_permission) > 0) {
+  $rup = mysqli_fetch_array($query_users_permission);
+  $dashboard = $rup["dashboard"];
+  $customer_service = $rup["customer_service"];
+  $transaction = $rup["transaction"];
+  $approval = $rup["approval"];
+  $reports = $rup["reports"];
+  $configuration = $rup["configuration"];
+  // Next the move
+  $query_role = mysqli_query($con, "SELECT * FROM `role` WHERE id = '$role_id'");
+  if (mysqli_num_rows($query_role) > 0) {
+    $qr = mysqli_fetch_array($query_role);
+    $role_title = $qr["title"];
+  } else {
+    header("location: ../function/logout.php");
+  }
+} else {
+  header("location: ../function/logout.php");
+  exit;
+}
+} else {
+  header("location: ../index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +56,7 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
+  
     <link rel="stylesheet" type="text/css" href="../assets/css/fontawesome.css">
     <!-- ico-font-->
     <link rel="stylesheet" type="text/css" href="../assets/css/icofont.css">
@@ -36,7 +79,8 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
     <!-- MAP -->
-   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="../assets/libs/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- GOOGLE -->
   </head>
   <body onload="startTime()">
@@ -161,8 +205,8 @@
               <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
               <li class="profile-nav onhover-dropdown p-0">
                 <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
-                  <div class="media-body"><span>name_of_user</span>
-                    <p class="mb-0 font-roboto">Director <i class="middle fa fa-angle-down"></i></p>
+                  <div class="media-body"><span><?php echo $user_fullname; ?></span>
+                    <p class="mb-0 font-roboto"><?php echo $role_title; ?> <i class="middle fa fa-angle-down"></i></p>
                   </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
@@ -170,7 +214,7 @@
                   <li><i data-feather="mail"></i><span>Notification</span></li>
                   <!-- <li><i data-feather="file-text"></i><span>Taskboard</span></li> -->
                   <!-- <li><i data-feather="settings"></i><span>Settings</span></li> -->
-                  <li><i data-feather="log-in"> </i><span>Log out</span></li>
+                  <li> <a href="../function/logout.php"> <i data-feather="log-in"> </i><span>Log out</span> </a></li>
                 </ul>
               </li>
             </ul>

@@ -53,6 +53,8 @@
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/theme-customizer/customizer.js"></script>
     <!-- login js-->
+    <script src="../assets/libs/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
     <!-- Plugin used-->
   </body>
 </html>

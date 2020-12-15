@@ -30,8 +30,8 @@ include("function/db/config.php");
 require_once "bat/phpmailer/PHPMailerAutoload.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // import DB
-$fn = $_POST["fullname"];
-$em = $_POST["email"];
+$fn = mysqli_real_escape_string($con, $_POST["fullname"]);
+$em = mysqli_real_escape_string($con, $_POST["email"]);
 $pass = $_POST["password"];
 $hash = password_hash($pass, PASSWORD_DEFAULT);
 $ut = "admin";
@@ -76,7 +76,7 @@ if (mysqli_num_rows($res) <= 0) {
              // $mail->addBCC("bcc@example.com");
              // Send HTML or Plain Text Email
              $mail->isHTML(true);
-             $mail->Subject = "Nspire School of Management and Technology";
+             $mail->Subject = "NSMT Welcome";
              $mail->Body = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
              <html dir='ltr' xmlns='http://www.w3.org/1999/xhtml'>
              
