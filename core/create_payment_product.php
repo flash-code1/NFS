@@ -2,7 +2,141 @@
 $web_title = "Create Payment Product";
 include("header.php");
 ?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $name = mysqli_real_escape_string($con, $_POST['name']);
+  $desc = mysqli_real_escape_string($con, $_POST['desc']);
+  $course = $_POST['course'];
+  $repay = $_POST['repay'];
+  $term = mysqli_real_escape_string($con, $_POST['term']);
+  $start = $_POST['start'];
+
+  $date_time = date('Y-m-d H:i:s');
+
+  $query_branch_check = mysqli_query($con, "SELECT * FROM `payment_product` WHERE name = '$name' AND courseId = '$course'");
+  
+  if (mysqli_num_rows($query_branch_check) <= 0) {
+    $insert_branch = mysqli_query($con, "INSERT INTO `payment_product` (`userId`, `courseId`, `name`, `description`, `fee_term`, `repayment_type`, `startMonth`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('{$user_id}', '{$course}', '{$name}', '{$desc}', '{$term}', '{$repay}', '{$start}', '{$date_time}', '{$date_time}', '1')");
+
+    if ($insert_branch) {
+      $query_branch_checkx = mysqli_query($con, "SELECT * FROM `payment_product` WHERE name = '$name' AND courseId = '$course'");
+      if (mysqli_num_rows($query_branch_checkx) > 0 ) {
+        $gtx = mysqli_fetch_array($query_branch_checkx);
+        $productId  = $gtx["id"];
+        // No category added yet to settings
+        $categoryId = 0;
+        $installment = 1;
+        $percentageSharing = 100.00;
+
+        // Work on Adding Repayment based on Date and Interval
+        $rep_start_date = $start;
+        $rpdt = date('Y-m-d', strtotime($rep_start_date.' - 1 month'));
+        $rep_intv_term = $term;
+        $rep_type = $repay;
+        // Start if Repayment type is Monthly
+        if ($rep_type = "Monthly") {
+          // a while loop
+          $i = 1;
+          while ($i <= $rep_intv_term) {
+            $rep_every = "month";
+            $paymentDue = date('Y-m-d', strtotime($rpdt . ' + ' . $i . ' '. $rep_every));
+            $repaymentMonth = date('F', strtotime($rpdt . ' + ' . $i . ' '. $rep_every));
+            // Insert
+            $exe_final = mysqli_query($con, "INSERT INTO `product_repayment_structure` (`productId`, `categoryId`, `paymentDue`, `installment`, `percentageSharing`, `repaymentMonth`, `isMandatory`, `createdDate`) VALUES ('{$productId}', '0', '{$paymentDue}', '1', '{$percentageSharing}', '{$repaymentMonth}', '1', '{$date_time}')");
+            if ($exe_final) {
+              echo '<script type="text/javascript">
+              $(document).ready(function(){
+                  Swal.fire({
+                      type: "success",
+                      title: "Repayment " '.$repaymentMonth.',
+                      text: "Thank you!",
+                      showConfirmButton: false,
+                      timer: 4000
+                  })
+              });
+              </script>
+              ';
+            }
+            // End Insert
+            $i++;
+          }
+        } else {
+          echo '<script type="text/javascript">
+          $(document).ready(function(){
+              Swal.fire({
+                  type: "error",
+                  title: "Repayment Failed",
+                  text: "Only Make Repayment for Monthly",
+                  showConfirmButton: false,
+                  timer: 4000
+              })
+          });
+          </script>
+          ';
+        }
+      } else {
+        echo '<script type="text/javascript">
+        $(document).ready(function(){
+            Swal.fire({
+                type: "error",
+                title: "Payment Product Error",
+                text: "Payment Product not Found for Repayment",
+                showConfirmButton: false,
+                timer: 4000
+            })
+        });
+        </script>
+        ';
+      }
+      
+       //
+    } else {
+      echo '<script type="text/javascript">
+      $(document).ready(function(){
+          Swal.fire({
+              type: "error",
+              title: "Creation Failed",
+              text: "Code Bug",
+              showConfirmButton: false,
+              timer: 4000
+          })
+      });
+      </script>
+      ';
+    }
+  } else {
+    echo '<script type="text/javascript">
+    $(document).ready(function(){
+        Swal.fire({
+            type: "error",
+            title: "Product Name Exist",
+            text: "You cant create same product twice",
+            showConfirmButton: false,
+            timer: 4000
+        })
+    });
+    </script>
+    ';
+  }
+}
+?>
 <!-- a new stuff -->
+<?php
+
+if ($configuration == 1){
+
+  // fUNCTION
+  function fill_course($con)
+{
+    $bch = mysqli_query($con, "SELECT * FROM `courses` ORDER BY id ASC");
+    $output = '';
+    while ($row = mysqli_fetch_array($bch)) {
+        $output .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+    }
+    return $output;
+}
+?>
 <!-- Page Sidebar Ends-->
 <div class="page-body">
           <div class="container-fluid">
@@ -73,22 +207,36 @@ include("header.php");
                           <div class="col-md-12">
                           <div class="form-group mb-3">
                               <label class="control-label">Name</label>
-                              <input class="form-control" type="text" placeholder="Java, Java Book" required="required">
-                            </div>
-                            <div class="form-group mb-3">
-                              <label class="control-label">Price</label>
-                              <input class="form-control" type="number" placeholder="60000" required="required">
-                            </div>
-                            <div class="form-group mb-3">
-                              <label class="control-label">Description</label>
-                              <textarea class="form-control" type="text" placeholder="Paid Java Books" required="required">
-                              </textarea>
+                              <input class="form-control" type="text" name="name" placeholder="Standard IJMB" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Course</label>
-                              <select class="form-control mt-1" type="text" required="required">
-                                <option value=""></option>
+                              <select class="form-control mt-1" type="text" name="course" required="required">
+                              <option value="">Choose Course</option>  
+                              <?php echo fill_course($con); ?>
                               </select>
+                            </div>
+                            <div class="form-group mb-3">
+                              <label class="control-label">Description</label>
+                              <textarea class="form-control" name="desc" required="required">
+                              </textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                              <label class="control-label">Repayment Type</label>
+                              <select class="form-control mt-1" type="text" name="repay" required="required">
+                                <option value="Monthly">Monthly</option>
+                                <!-- <option value="Weekly">Weekly</option>
+                                <option value="Daily">Daily</option> -->
+                              </select>
+                            </div>
+                            <div class="form-group mb-3">
+                              <label class="control-label">Repayment Term</label>
+                              <input class="form-control" type="number" name="term" placeholder="6" required="required">
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                              <label class="control-label">Start Date</label>
+                              <input class="form-control mt-1" name="start" type="date" required="required">
                             </div>
                             <button class="btn btn-success pull-right" type="submit">Finish!</button>
                           </div>
@@ -103,5 +251,24 @@ include("header.php");
           <!-- Container-fluid Ends-->
         </div>
 <?php
+} else 
+{
+  echo '<script type="text/javascript">
+  $(document).ready(function(){
+   swal.fire({
+    type: "error",
+    title: "User not Authorized",
+    text: "you have not been approved to view this page",
+   showConfirmButton: false,
+    timer: 2000
+    }).then(
+    function (result) {
+      history.go(-1);
+    }
+    )
+    });
+   </script>
+  ';
+}
 include("footer.php");
 ?>

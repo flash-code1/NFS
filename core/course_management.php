@@ -71,7 +71,7 @@ if ($configuration == 1){
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table id="empCs" class="display nowrap dataTable">
+                      <table id="empCsdd" class="display nowrap dataTable">
                         <thead>
                           <tr>
                             <th>Name</th>
@@ -81,6 +81,7 @@ if ($configuration == 1){
                             <th>Branch</th>
                             <th>Createdon</th>
                             <th>Status</th>
+                            <th>View</th>
                           </tr>
                         </thead>
                         <!-- <tfoot>
@@ -96,27 +97,27 @@ if ($configuration == 1){
                       </table>
                     </div>
                     <script>
-        $(document).ready(function(){
-            $('#empCs').DataTable({
-                'processing': true,
-                'serverSide': true,
-                'serverMethod': 'post',
-                'ajax': {
-                    'url':'datatable/course.php'
-                },
-                'columns': [
-                    { data: 'Name' },
-                    { data: 'shortCode' },
-                    { data: 'Desc' },
-                    { data: 'batchYear' },
-                    { data: 'branch' },
-                    { data: 'cdate' },
-                    { data: 'status' },
-                    { data: 'close' },
-                ]
-            });
-        });
-        </script>
+                    $(document).ready(function(){
+                        $('#empCsdd').DataTable({
+                            'processing': true,
+                            'serverSide': true,
+                            'serverMethod': 'post',
+                            'ajax': {
+                                'url':'datatable/course_dt.php'
+                            },
+                            'columns': [
+                                { data: 'name' },
+                                { data: 'shortCode' },
+                                { data: 'Desc' },
+                                { data: 'batchYear' },
+                                { data: 'branch' },
+                                { data: 'cdate' },
+                                { data: 'status' },
+                                { data: 'close' },
+                            ]
+                        });
+                    });
+                    </script>
                   </div>
                 </div>
               </div>

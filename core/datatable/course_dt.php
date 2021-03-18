@@ -43,7 +43,7 @@ $data = array();
             $enb = "Not Active";
         }
         $data[] = array(
-                "Name"=>strtoupper($row['name']),
+                "name"=>strtoupper($row['name']),
                 "shortCode"=>strtoupper($row['shortCode']),
                 "Desc"=>$row['Description'],
                 "batchYear"=>$row['batchYear'],

@@ -1,74 +1,74 @@
 <?php
-$web_title = "Create Payment Category";
+$web_title = "Payment Product Settings";
 include("header.php");
 ?>
 <!-- a new stuff -->
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $name = mysqli_real_escape_string($con, $_POST['name']);
-  $price = mysqli_real_escape_string($con, $_POST['price']);
-  $desc = mysqli_real_escape_string($con, $_POST['desc']);
-  $course = $_POST['course'];
-  $date_time = date('Y-m-d H:i:s');
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+//   $name = mysqli_real_escape_string($con, $_POST['name']);
+//   $price = mysqli_real_escape_string($con, $_POST['price']);
+//   $desc = mysqli_real_escape_string($con, $_POST['desc']);
+//   $course = $_POST['course'];
+//   $date_time = date('Y-m-d H:i:s');
 
-  $query_branch_check = mysqli_query($con, "SELECT * FROM `payment_category` WHERE name = '$name' AND course_id = '$course'");
+//   $query_branch_check = mysqli_query($con, "SELECT * FROM `payment_category` WHERE name = '$name' AND course_id = '$course'");
   
-  if (mysqli_num_rows($query_branch_check) <= 0) {
-    $insert_branch = mysqli_query($con, "INSERT INTO `payment_category` (`course_id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('{$course}', '{$name}', '{$desc}', '{$price}', '{$date_time}', '{$date_time}', '1')");
+//   if (mysqli_num_rows($query_branch_check) <= 0) {
+//     $insert_branch = mysqli_query($con, "INSERT INTO `payment_category` (`course_id`, `name`, `description`, `price`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('{$course}', '{$name}', '{$desc}', '{$price}', '{$date_time}', '{$date_time}', '1')");
 
-    if ($insert_branch) {
-      echo '<script type="text/javascript">
-        $(document).ready(function(){
-            Swal.fire({
-                type: "success",
-                title: "Category Created",
-                text: "Thank you!",
-                showConfirmButton: false,
-                timer: 6000
-            })
-        });
-        </script>
-        ';
-    } else {
-      echo '<script type="text/javascript">
-      $(document).ready(function(){
-          Swal.fire({
-              type: "error",
-              title: "Creation Failed",
-              text: "Code Bug",
-              showConfirmButton: false,
-              timer: 4000
-          })
-      });
-      </script>
-      ';
-    }
-  } else {
-    echo '<script type="text/javascript">
-    $(document).ready(function(){
-        Swal.fire({
-            type: "error",
-            title: "Category Name Exist",
-            text: "You cant create same category twice",
-            showConfirmButton: false,
-            timer: 4000
-        })
-    });
-    </script>
-    ';
-  }
-}
+//     if ($insert_branch) {
+//       echo '<script type="text/javascript">
+//         $(document).ready(function(){
+//             Swal.fire({
+//                 type: "success",
+//                 title: "Category Created",
+//                 text: "Thank you!",
+//                 showConfirmButton: false,
+//                 timer: 6000
+//             })
+//         });
+//         </script>
+//         ';
+//     } else {
+//       echo '<script type="text/javascript">
+//       $(document).ready(function(){
+//           Swal.fire({
+//               type: "error",
+//               title: "Creation Failed",
+//               text: "Code Bug",
+//               showConfirmButton: false,
+//               timer: 4000
+//           })
+//       });
+//       </script>
+//       ';
+//     }
+//   } else {
+//     echo '<script type="text/javascript">
+//     $(document).ready(function(){
+//         Swal.fire({
+//             type: "error",
+//             title: "Category Name Exist",
+//             text: "You cant create same category twice",
+//             showConfirmButton: false,
+//             timer: 4000
+//         })
+//     });
+//     </script>
+//     ';
+//   }
+// }
 
 // function
-function fill_course($con)
-{
-    $bch = mysqli_query($con, "SELECT * FROM `courses` ORDER BY id ASC");
-    $output = '';
-    while ($row = mysqli_fetch_array($bch)) {
-        $output .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
-    }
-    return $output;
-}
+// function fill_course($con)
+// {
+//     $bch = mysqli_query($con, "SELECT * FROM `courses` ORDER BY id ASC");
+//     $output = '';
+//     while ($row = mysqli_fetch_array($bch)) {
+//         $output .= '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+//     }
+//     return $output;
+// }
 ?>
 <!-- Page Sidebar Ends-->
 <?php
@@ -80,10 +80,10 @@ if ($configuration == 1){
             <div class="page-header">
               <div class="row">
                 <div class="col-6">
-                  <h3>Payment Category</h3>
+                  <h3>Payment Product Settings</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="staff_management.php"><i data-feather="home"></i></a></li>
-                    <li class="breadcrumb-item">Create Category</li>
+                    <li class="breadcrumb-item">Product Configuration</li>
                   </ol>
                 </div>
                 <div class="col-6">

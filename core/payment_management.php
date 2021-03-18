@@ -2,6 +2,13 @@
 $web_title = "Payment Product";
 include("header.php");
 ?>
+<link href='datatable/DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
+<script src="datatable/DataTables/datatables.min.js"></script>
+<script src="datatable/jquery-3.3.1.min.js"></script>
+<?php
+
+if ($configuration == 1){
+?>
 <!-- make move -->
 <div class="page-body">
           <div class="container-fluid">
@@ -57,22 +64,25 @@ include("header.php");
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5>View Payment Product</h5><span>This page help you view all the Payment Product of Nspire and also as a route for creating.</span>
+                    <h5>View Payment Product</h5><span>This page help you view all the Payment Product of Nspire and also as a route for creating. <br>
+                  If you dont have a product please create one, the settings button helps to configure the repayment.
+                  </span>
                     <!-- button to create -->
                     <button onclick="window.open ('create_payment_product.php')" style="float: right;" class="btn btn-pill btn-success btn-air-success btn-success-gradien" type="button">Create Product</button>
                     <!-- end button -->
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="display datatables" id="server-side-datatable">
+                      <table id="payMan" class="display nowrap dataTable">
                         <thead>
                           <tr>
+                            <th>Course</th>
                             <th>Name/Title</th>
                             <th>Description</th>
-                            <th>Course</th>
-                            <th>CreatedOn</th>
-                            <th>UpdatedOn</th>
-                            <th>View</th>
+                            <th>FeeTerm</th>
+                            <th>RepaymentType</th>
+                            <th>startMonth</th>
+                            <th>Settings</th>
                           </tr>
                         </thead>
                         <!-- <tfoot>
@@ -87,6 +97,27 @@ include("header.php");
                         </tfoot> -->
                       </table>
                     </div>
+                    <script>
+        $(document).ready(function(){
+            $('#payMan').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url':'datatable/pay_man.php'
+                },
+                'columns': [
+                    { data: 'course_name' },
+                    { data: 'name' },
+                    { data: 'description' },
+                    { data: 'fee_term' },
+                    { data: 'repayment_type' },
+                    { data: 'startMonth' },
+                    { data: 'close' },
+                ]
+            });
+        });
+        </script>
                   </div>
                 </div>
               </div>
@@ -97,5 +128,24 @@ include("header.php");
         </div>
 <!-- end -->
 <?php
+} else 
+{
+  echo '<script type="text/javascript">
+  $(document).ready(function(){
+   swal.fire({
+    type: "error",
+    title: "User not Authorized",
+    text: "you have not been approved to view this page",
+   showConfirmButton: false,
+    timer: 2000
+    }).then(
+    function (result) {
+      history.go(-1);
+    }
+    )
+    });
+   </script>
+  ';
+}
 include("footer.php");
 ?>
