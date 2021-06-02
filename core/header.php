@@ -259,13 +259,13 @@ if (mysqli_num_rows($query_users_permission) > 0) {
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Dashboard</span>
                       <label class="badge badge-success">1</label></a>
                     <ul class="nav-submenu menu-content">
-                      <li><a class="" href="index.php">Finance Report</a></li>
+                      <li><a class="" href="index.php">Overview Report</a></li>
                     </ul>
                   </li>
                   <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather=""></i><span class="">Customer Service</span>
                       <label class="badge badge-success">2</label></a>
                     <ul class="nav-submenu menu-content">
-                      <li><a class="" href="#">Students</a></li>
+                      <li><a class="" href="student.php">Students</a></li>
                       <li><a class="" href="#">Enquiry</a></li>
                     </ul>
                   </li>
@@ -280,7 +280,7 @@ if (mysqli_num_rows($query_users_permission) > 0) {
                       <label class="badge badge-success">2</label></a>
                     <ul class="nav-submenu menu-content">
                       <li><a class="" href="#">Fees Payment</a></li>
-                      <li><a class="" href="#">Students</a></li>
+                      <li><a class="" href="student_approve.php">Students</a></li>
                       <!-- <li><a class="" href="index.php">Card Track</a></li> -->
                     </ul>
                   </li>

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $paymentDue = date('Y-m-d', strtotime($rpdt . ' + ' . $i . ' '. $rep_every));
             $repaymentMonth = date('F', strtotime($rpdt . ' + ' . $i . ' '. $rep_every));
             // Insert
-            $exe_final = mysqli_query($con, "INSERT INTO `product_repayment_structure` (`productId`, `categoryId`, `paymentDue`, `installment`, `percentageSharing`, `repaymentMonth`, `isMandatory`, `createdDate`) VALUES ('{$productId}', '0', '{$paymentDue}', '1', '{$percentageSharing}', '{$repaymentMonth}', '1', '{$date_time}')");
+            $exe_final = mysqli_query($con, "INSERT INTO `product_repayment_structure` (`productId`, `paymentDue`, `installment`, `percentageSharing`, `repaymentMonth`, `isMandatory`, `createdDate`) VALUES ('{$productId}', '{$paymentDue}', '1', '{$percentageSharing}', '{$repaymentMonth}', '1', '{$date_time}')");
             if ($exe_final) {
               echo '<script type="text/javascript">
               $(document).ready(function(){
@@ -60,6 +60,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             // End Insert
             $i++;
+          }
+          if ($exe_final) {
+            echo '<script type="text/javascript">
+              $(document).ready(function(){
+                  Swal.fire({
+                      type: "success",
+                      title: "Repayment " '.$repaymentMonth.',
+                      text: "Thank you!",
+                      showConfirmButton: false,
+                      timer: 4000
+                  })
+              });
+              </script>
+              ';
+          } else {
+            echo '<script type="text/javascript">
+          $(document).ready(function(){
+              Swal.fire({
+                  type: "error",
+                  title: "Repayment Failed",
+                  text: "System Array Broke",
+                  showConfirmButton: false,
+                  timer: 4000
+              })
+          });
+          </script>
+          ';
           }
         } else {
           echo '<script type="text/javascript">
@@ -207,7 +234,7 @@ if ($configuration == 1){
                           <div class="col-md-12">
                           <div class="form-group mb-3">
                               <label class="control-label">Name</label>
-                              <input class="form-control" type="text" name="name" placeholder="Standard IJMB" required="required">
+                              <input class="form-control" type="text" name="name" placeholder="Standard Mango 2019" required="required">
                             </div>
                             <div class="form-group mb-3">
                               <label class="control-label">Course</label>

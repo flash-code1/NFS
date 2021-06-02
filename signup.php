@@ -47,7 +47,7 @@ if (mysqli_num_rows($res) <= 0) {
         // add branch, role and permission and users
         $select_branch = mysqli_query($con, "SELECT * FROM `branch` WHERE id = '1'");
         if (mysqli_num_rows($select_branch) <= 0){
-        $query_branch = mysqli_query($con, "INSERT INTO `branch` (`id`, `name`, `location`, `Enabled`) VALUES ('1', 'Nspire Head office', 'Oyo house', '1')");
+        $query_branch = mysqli_query($con, "INSERT INTO `branch` (`id`, `name`, `location`, `Enabled`) VALUES ('1', 'Nspire Head office', 'Berger roundabout, old Arab contractor yard, Abuja', '1')");
         if ($query_branch) {
             $query_role = mysqli_query($con, "INSERT INTO `role` (`id`, `title`, `Description`, `createdAt`, `updatedAt`, `Enabled`) VALUES ('1', 'Super User', 'Control over the system', '{$date_time}', '{$date_time}', '1')");
             if ($query_role) {

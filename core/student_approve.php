@@ -6,8 +6,7 @@ include("header.php");
 <script src="datatable/DataTables/datatables.min.js"></script>
 <script src="datatable/jquery-3.3.1.min.js"></script>
 <?php
-
-if ($customer_service == 1){
+if ($approval == 1) {
 ?>
 <!-- make move -->
 <div class="page-body">
@@ -15,7 +14,7 @@ if ($customer_service == 1){
             <div class="page-header">
               <div class="row">
                 <div class="col-6">
-                  <h3>Student Management</h3>
+                  <h3>Student Approval</h3>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
                     <li class="breadcrumb-item">View Student</li>
@@ -64,14 +63,14 @@ if ($customer_service == 1){
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h5>View Student Details</h5><span>This page display all active/approved student of Nspire.</span>
+                    <h5>View Students Pending Approval</h5><span>This page display all active/approved student of Nspire.</span>
                     <!-- button to create -->
                     <button onclick="window.open ('create_student.php')" style="float: right;" class="btn btn-pill btn-success btn-air-success btn-success-gradien" type="button">Enroll Student</button>
                     <!-- end button -->
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table id="empCsdd" class="display nowrap dataTable">
+                      <table id="empCsddx" class="display nowrap dataTable">
                         <thead>
                           <tr>
                             <th>Student No.</th>
@@ -83,6 +82,7 @@ if ($customer_service == 1){
                             <th>DOB</th>
                             <th>Address</th>
                             <th>Admitted Date</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <!-- <tfoot>
@@ -99,23 +99,24 @@ if ($customer_service == 1){
                     </div>
                     <script>
                     $(document).ready(function(){
-                        $('#empCsdd').DataTable({
+                        $('#empCsddx').DataTable({
                             'processing': true,
                             'serverSide': true,
                             'serverMethod': 'post',
                             'ajax': {
-                                'url':'datatable/student.php'
+                                'url':'datatable/student_app.php'
                             },
                             'columns': [
-                                { data: 'StudentNo' },
-                                { data: 'Course' },
-                                { data: 'PaymentProduct' },
-                                { data: 'Email' },
-                                { data: 'Fullname' },
-                                { data: 'Phone' },
-                                { data: 'DOB' },
-                                { data: 'Address' },
-                                { data: 'AdmissionDate' },
+                                { data: 'student_no' },
+                                { data: 'course_id' },
+                                { data: 'product_id' },
+                                { data: 'email' },
+                                { data: 'fullname' },
+                                { data: 'phone' },
+                                { data: 'dob' },
+                                { data: 'address' },
+                                { data: 'admission_date' },
+                                { data: 'Status' },
                             ]
                         });
                     });

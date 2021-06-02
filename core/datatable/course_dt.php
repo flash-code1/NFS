@@ -50,7 +50,7 @@ $data = array();
                 "branch"=>$row['bn'],
                 "cdate"=> $row['createdAt'],
                 "status"=> $enb,
-                "close"=>"<a href='#' class='btn btn-pill btn-warning btn-air-warning btn-warning-gradien' type='button'>View</a>"
+                "close"=>"<a href='#' class='btn btn-pill btn-warning btn-air-warning btn-warning-gradient' type='button'>View</a>"
             );
     }
     
