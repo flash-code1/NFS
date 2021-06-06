@@ -27,7 +27,7 @@ $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$staffQuery = "SELECT * FROM `student` WHERE 1 $searchQuery AND is_approved = '0' order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$staffQuery = "SELECT * FROM `student` WHERE 1 $searchQuery order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
 $empRecords = mysqli_query($con, $staffQuery);
 $data = array();
 // echo $row;
@@ -50,8 +50,8 @@ $data = array();
         if ($row["is_approved"] == 1) {
             // Qwerty
             $status_warning = "danger";
-            $status = "Terminate";
-            $code = 0;
+            $status = "Disable";
+            $code = 2;
         } else {
             $status_warning = "primary";
             $status = "Approve";

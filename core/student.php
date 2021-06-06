@@ -107,15 +107,15 @@ if ($customer_service == 1){
                                 'url':'datatable/student.php'
                             },
                             'columns': [
-                                { data: 'StudentNo' },
-                                { data: 'Course' },
-                                { data: 'PaymentProduct' },
-                                { data: 'Email' },
-                                { data: 'Fullname' },
-                                { data: 'Phone' },
-                                { data: 'DOB' },
-                                { data: 'Address' },
-                                { data: 'AdmissionDate' },
+                                { data: 'student_no' },
+                                { data: 'course_id' },
+                                { data: 'product_id' },
+                                { data: 'email' },
+                                { data: 'fullname' },
+                                { data: 'phone' },
+                                { data: 'dob' },
+                                { data: 'address' },
+                                { data: 'admission_date' }
                             ]
                         });
                     });

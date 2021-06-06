@@ -139,16 +139,16 @@ if (mysqli_num_rows($query_users_permission) > 0) {
               </li> -->
               <!-- <li>                         <span class="header-search"><i data-feather="search"></i></span></li> -->
               <li class="onhover-dropdown">
-                <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-pill badge-secondary">4</span></div>
+                <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-pill badge-secondary">1</span></div>
                 <ul class="notification-dropdown onhover-show-div">
                   <li class="bg-primary">
                     <h6 class="f-18 mb-0">Notitication</h6>
-                    <p class="mb-0">You have 4 new notification</p>
+                    <p class="mb-0">You have 1 new notification</p>
                   </li>
                   <li>
-                    <p class="mb-0"><i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery processing <span class="pull-right">10 min.</span></p>
+                    <p class="mb-0"><i class="fa fa-circle-o mr-3 font-primary"> </i>... <span class="pull-right">10 min.</span></p>
                   </li>
-                  <li>
+                  <!-- <li>
                     <p class="mb-0"><i class="fa fa-circle-o mr-3 font-success"></i>Order Complete<span class="pull-right">1 hr</span></p>
                   </li>
                   <li>
@@ -156,7 +156,7 @@ if (mysqli_num_rows($query_users_permission) > 0) {
                   </li>
                   <li>
                     <p class="mb-0"><i class="fa fa-circle-o mr-3 font-danger"></i>Delivery Complete<span class="pull-right">6 hr</span></p>
-                  </li>
+                  </li> -->
                   <li><a class="btn btn-primary" href="#">Check all notification</a>
                     <!--a.f-15.f-w-500.txt-dark(href="#") Check all notification-->
                   </li>

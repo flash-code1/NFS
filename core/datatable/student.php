@@ -45,16 +45,29 @@ $data = array();
         $query_payprod = mysqli_query($con, "SELECT `payment_product`.`name` FROM `payment_product` WHERE id = '$p_id'");
         $gpt = mysqli_fetch_array($query_payprod);
         $prod_name = $gpt["name"];
+        // update the place
+        $student_id = $row["id"];
+        if ($row["is_approved"] == 1) {
+            // Qwerty
+            $status_warning = "danger";
+            $status = "Terminate";
+            $code = 0;
+        } else {
+            $status_warning = "primary";
+            $status = "Approve";
+            $code = 1;
+        }
+        // end update
         $data[] = array(
-                "StudentNo"=>strtoupper($row['student_no']),
-                "Course"=>strtoupper($course_name),
-                "PaymentProduct"=> strtoupper($prod_name),
-                "Email"=> strtoupper($row["email"]),
-                "Fullname"=> strtoupper($row["fullname"]),
-                "Phone"=> strtoupper($row["phone"]),
-                "DOB"=> strtoupper($row["fullname"]),
-                "Address"=> strtoupper($row["address"]),
-                "AdmissionDate"=> strtoupper($row["admission_date"]),
+                "student_no"=>strtoupper($row['student_no']),
+                "course_id"=>strtoupper($course_name),
+                "product_id"=> strtoupper($prod_name),
+                "email"=> strtoupper($row["email"]),
+                "fullname"=> strtoupper($row["fullname"]),
+                "phone"=> strtoupper($row["phone"]),
+                "dob"=> strtoupper($row["dob"]),
+                "address"=> strtoupper($row["address"]),
+                "admission_date"=> strtoupper($row["admission_date"])
             );
     }
     
