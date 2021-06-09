@@ -166,7 +166,7 @@ if (mysqli_num_rows($res) <= 0) {
     });
     </script>
     ';
-                 echo header ("Location: login.php?success='$hash'");
+                 echo header ("Location: index.php?success='$hash'");
              }
         } else {
             // echo account user not created
